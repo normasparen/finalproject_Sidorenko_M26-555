@@ -1,0 +1,20 @@
+{
+  "BTC_USD": {
+    "rate": 78000.0,
+    "updated_at": "2026-11-02T12:34:43"
+  },
+  "USD_BTC": {
+    "rate": 1.282051282051282e-05,
+    "updated_at": "2026-11-02T12:34:43"
+  },
+  "source": "ParserService",
+  "last_refresh": "2026-11-02T12:35:15",
+  "BTC_ETH": {
+    "rate": 24.375,
+    "updated_at": "2026-11-02T12:35:15"
+  },
+  "ETH_BTC": {
+    "rate": 0.041025641025641026,
+    "updated_at": "2026-11-02T12:35:15"
+  }
+}
