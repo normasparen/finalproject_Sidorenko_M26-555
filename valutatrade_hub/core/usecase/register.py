@@ -1,10 +1,9 @@
 import uuid
 from datetime import datetime
 
-from valutatrade_hub.core import storage
-from valutatrade_hub.core.models import User
+from valutatrade_hub.core.models.user import User
 from valutatrade_hub.core.utils.exceptions import RegisterError
-from valutatrade_hub.core.utils.utility import next_user_id, hash_password
+from valutatrade_hub.infra.database import db
 
 
 def register(username: str, password: str) -> User:
@@ -13,33 +12,27 @@ def register(username: str, password: str) -> User:
     if not password or len(password) < 4:
         raise RegisterError("Пароль должен быть не короче 4 символов")
 
-    users = storage.load_users()
+    users = db.load_users()
     if any(u["username"].lower() == username.lower() for u in users):
         raise RegisterError(f"Имя пользователя '{username}' уже занято")
 
-    user_id = next_user_id(users)
+    user_id = max((u["user_id"] for u in users), default=0) + 1
     salt = uuid.uuid4().hex[:8]
-    hashed = hash_password(password, salt)
-    reg_date = datetime.now().isoformat(timespec="seconds")
+    hashed = User._hash_password(password, salt)
+    reg_date = datetime.now()
 
-    users.append({
+    record = {
         "user_id": user_id,
         "username": username,
         "hashed_password": hashed,
         "salt": salt,
-        "registration_date": reg_date,
-    })
-    storage.save_users(users)
+        "registration_date": reg_date.isoformat(timespec="seconds"),
+    }
+    users.append(record)
+    db.save_users(users)
 
-    # Создаём пустой портфель
-    portfolios = storage.load_portfolios()
-    portfolios.append({"user_id": user_id, "wallets": {}})
-    storage.save_portfolios(portfolios)
+    portfolios = db.load_portfolios()
+    portfolios.append({"user_id": user_id, "wallets": {"USD": {"balance": 10000.0}}})
+    db.save_portfolios(portfolios)
 
-    return User(
-        user_id=user_id,
-        username=username,
-        hashed_password=hashed,
-        salt=salt,
-        registration_date=datetime.fromisoformat(reg_date),
-    )
+    return User(user_id, username, hashed, salt, reg_date)

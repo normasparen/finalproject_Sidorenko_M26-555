@@ -1,25 +1,17 @@
 import hashlib
-import uuid
 from datetime import datetime
+from typing import Optional
 
 
 class User:
-
-    """Класс пользователя"""
-
-    def __init__(self, user_id: int, username: str, hashed_password: str, salt: str, registration_date: datetime):
-
+    def __init__(self, user_id: int, username: str, hashed_password: str,
+                 salt: str, registration_date: datetime):
         self._user_id = user_id
         self._username = None
         self._hashed_password = hashed_password
-        self._salt = salt if salt else self._generate_salt()
+        self._salt = salt
         self._registration_date = registration_date
-
         self.username = username
-
-    @staticmethod
-    def _generate_salt() -> str:
-        return uuid.uuid4().hex[:8]
 
     @staticmethod
     def _hash_password(password: str, salt: str) -> str:
@@ -33,6 +25,12 @@ class User:
     def username(self) -> str:
         return self._username
 
+    @username.setter
+    def username(self, value: str) -> None:
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError("Имя пользователя не может быть пустым.")
+        self._username = value.strip()
+
     @property
     def hashed_password(self) -> str:
         return self._hashed_password
@@ -45,35 +43,48 @@ class User:
     def registration_date(self) -> datetime:
         return self._registration_date
 
-    @username.setter
-    def username(self, value: str) -> None:
-        """Сеттер username с проверкой на непустоту"""
-        if not isinstance(value, str) or not value.strip():
-            raise ValueError("Имя пользователя не может быть пустым.")
-        self._username = value.strip()
+    def change_password(self, new_password: str) -> None:
+        if not new_password or len(new_password) < 4:
+            raise ValueError("Пароль должен быть не короче 4 символов.")
+        self._hashed_password = self._hash_password(new_password, self._salt)
 
-    @hashed_password.setter
-    def hashed_password(self, value: str) -> None:
-        if not isinstance(value, str):
-            raise ValueError("Хеш пароля должен быть строкой.")
-        self._hashed_password = value
+    def verify_password(self, password: str) -> bool:
+        return self._hash_password(password, self._salt) == self._hashed_password
 
     def get_user_info(self) -> dict:
         info = {
             "user_id": self._user_id,
             "username": self._username,
-            "registration_date": self._registration_date
+            "registration_date": self._registration_date.isoformat()
+            if isinstance(self._registration_date, datetime) else self._registration_date,
         }
-        print(f"user_id: {self.user_id}")
-        print(f"username: {self.username}")
-        print(f"registration_date: {self.registration_date}")
-
+        print(f"ID: {info['user_id']}")
+        print(f"Имя: {info['username']}")
+        print(f"Дата регистрации: {info['registration_date']}")
         return info
 
-    def change_password(self, new_password: str) -> None:
-        self._hashed_password = self._hash_password(new_password, self._salt)
+    def to_dict(self) -> dict:
+        reg = self._registration_date
+        return {
+            "user_id": self._user_id,
+            "username": self._username,
+            "hashed_password": self._hashed_password,
+            "salt": self._salt,
+            "registration_date": reg.isoformat() if isinstance(reg, datetime) else reg,
+        }
 
-    def verify_password(self, password: str) -> bool:
-        if not isinstance(password, str):
-            return False
-        return self._hash_password(password, self._salt) == self._hashed_password
+    @classmethod
+    def from_dict(cls, data: dict) -> "User":
+        reg = data.get("registration_date")
+        if isinstance(reg, str):
+            try:
+                reg = datetime.fromisoformat(reg)
+            except ValueError:
+                reg = datetime.now()
+        return cls(
+            user_id=data["user_id"],
+            username=data["username"],
+            hashed_password=data.get("hashed_password", ""),
+            salt=data.get("salt", ""),
+            registration_date=reg,
+        )

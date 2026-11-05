@@ -1,0 +1,7 @@
+INFO 2026-11-05T09:27:22 BUY user='unknown' currency='unknown' amount=0.0000 result=OK (details: {'currency': 'USD', 'amount': 5000.0, 'rate': 1.0, 'old_balance': 0.0, 'new_balance': 0.0, 'cost_usd': 5000.0})
+ERROR 2026-11-05T09:27:37 BUY user='unknown' currency='unknown' amount=0.0000 result=ERROR error_type='BuyError' error_msg='Недостаточно USD: требуется 3720.00 USD'
+INFO 2026-11-05T09:33:07 BUY user='unknown' currency='unknown' amount=0.0000 result=OK (details: {'currency': 'BTC', 'amount': 0.1, 'rate': 59337.21, 'old_balance': 0.0, 'new_balance': 0.1, 'cost_usd': 5933.7210000000005})
+ERROR 2026-11-05T09:33:47 BUY user='unknown' currency='unknown' amount=0.0000 result=ERROR error_type='BuyError' error_msg='Недостаточно USD: требуется 59337.21 USD'
+ERROR 2026-11-05T09:34:21 SELL user='unknown' currency='unknown' amount=0.0000 result=ERROR error_type='SellError' error_msg='Недостаточно средств: доступно 0.1 BTC, требуется 0.2 BTC'
+INFO 2026-11-05T09:34:25 SELL user='unknown' currency='unknown' amount=0.0000 result=OK (details: {'currency': 'BTC', 'amount': 0.09, 'rate': 59337.21, 'old_balance': 0.1, 'new_balance': 0.010000000000000009, 'proceeds_usd': 5340.3489})
+ERROR 2026-11-05T09:39:15 SELL user='unknown' currency='BTC' amount=0.0900 result=ERROR error_type='SellError' error_msg='Недостаточно средств: доступно 0.010000000000000009 BTC, требуется 0.09 BTC'

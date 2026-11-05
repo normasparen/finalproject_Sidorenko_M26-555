@@ -1,30 +1,23 @@
 from datetime import datetime
 
-from valutatrade_hub.core.models import User
-from valutatrade_hub.core.session import Session
-from valutatrade_hub.core.usecase.portfolio import load_portfolio_for_user
+from valutatrade_hub.core.models.user import User
 from valutatrade_hub.core.utils.exceptions import LoginError
-from valutatrade_hub.core.utils.utility import find_user, hash_password
+from valutatrade_hub.core.session import Session
+from valutatrade_hub.infra.database import db
 
 
 def login(username: str, password: str) -> User:
-    record = find_user(username)
+    users = db.load_users()
+    record = next(
+        (u for u in users if u["username"].lower() == username.lower()), None
+    )
     if record is None:
         raise LoginError(f"Пользователь '{username}' не найден")
 
     salt = record.get("salt", "")
-    expected = record["hashed_password"]
-    if hash_password(password, salt) != expected:
+    if User._hash_password(password, salt) != record["hashed_password"]:
         raise LoginError("Неверный пароль")
 
-    user = User(
-        user_id=record["user_id"],
-        username=record["username"],
-        hashed_password=record["hashed_password"],
-        salt=salt,
-        registration_date=datetime.fromisoformat(record["registration_date"]),
-    )
-
-    Session.current_user = user
-    Session.current_portfolio = load_portfolio_for_user(user.user_id)
+    user = User.from_dict(record)
+    Session.login(user)
     return user
