@@ -20,10 +20,10 @@ uv sync
  ```
 
 ## 🔑 Ключи API
-Создайте файл **.env** в корне проекта с таким содержимым:
+Создайте файл **.env** в корне проекта со следущим содержимым:
 
-*COINGECKO_API_KEY=ключ_coinсgeck
-EXCHANGERATE_API_KEY=ключ_exchangerate*
+*COINGECKO_API_KEY=ключ_coinсgeck*
+*EXCHANGERATE_API_KEY=ключ_exchangerate*
 
 
 ## 🤖 Запуск парсера
