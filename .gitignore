@@ -1,6 +1,8 @@
 .idea
 .venv
 .__pycache__
+__pycache__/
 .session
+.ruff_cache/
 .pyc
 .env
