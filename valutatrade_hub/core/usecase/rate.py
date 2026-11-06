@@ -1,13 +1,15 @@
-from datetime import datetime, timedelta
-from typing import Dict, Optional, Tuple
+from datetime import UTC, datetime, timedelta
 
 from valutatrade_hub.core.currencies import get_currency
-from valutatrade_hub.core.utils.exceptions import CurrencyNotFoundError, RateError
+from valutatrade_hub.core.utils.exceptions import (
+    ApiRequestError,
+    CurrencyNotFoundError,
+    RateError,
+)
 from valutatrade_hub.infra.database import db
 from valutatrade_hub.infra.settings import SettingsLoader
-from valutatrade_hub.core.utils.exceptions import ApiRequestError
 
-STUB_RATES_TO_USD: Dict[str, float] = {
+STUB_RATES_TO_USD: dict[str, float] = {
     "USD": 1.0, "EUR": 1.0786, "GBP": 1.27,
     "BTC": 59337.21, "ETH": 3720.00, "RUB": 0.01016,
 }
@@ -30,21 +32,23 @@ def _is_fresh(updated_at: str) -> bool:
     if not updated_at:
         return False
     try:
-        dt = datetime.fromisoformat(updated_at)
+        dt = datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=UTC)
+        now = datetime.now(UTC)
+        return now - dt <= _ttl()
     except (ValueError, TypeError):
         return False
-    return _now() - dt <= _ttl()
 
 
-def _fetch_from_parser(from_code: str, to_code: str) -> Optional[float]:
+def _fetch_from_parser(from_code: str, to_code: str) -> float | None:
     if from_code not in STUB_RATES_TO_USD or to_code not in STUB_RATES_TO_USD:
         raise ApiRequestError(f"нет данных для {from_code}->{to_code}")
     return STUB_RATES_TO_USD[from_code] / STUB_RATES_TO_USD[to_code]
 
-
-# ---------- Замыкание-кэш в памяти ----------
+# cache
 def _make_cache(ttl: timedelta):
-    cache: Dict[tuple, Tuple[float, datetime]] = {}
+    cache: dict[tuple, tuple[float, datetime]] = {}
 
     def get_cached(func, *args):
         now = _now()
@@ -63,7 +67,7 @@ def _make_cache(ttl: timedelta):
 _get_cached = _make_cache(_ttl())
 
 
-def _load_from_file_or_parser(from_code: str, to_code: str) -> Optional[float]:
+def _load_from_file_or_parser(from_code: str, to_code: str) -> float | None:
     cache_data = db.load_rates()
     key, rev = f"{from_code}_{to_code}", f"{to_code}_{from_code}"
 
@@ -89,7 +93,7 @@ def _load_from_file_or_parser(from_code: str, to_code: str) -> Optional[float]:
     return rate
 
 
-def get_rate(from_code: str, to_code: str) -> Tuple[Optional[float], Optional[str]]:
+def get_rate(from_code: str, to_code: str) -> tuple[float | None, str | None]:
     from_c = (from_code or "").strip().upper()
     to_c = (to_code or "").strip().upper()
     if not from_c or not to_c:

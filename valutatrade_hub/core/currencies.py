@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict
+
 from valutatrade_hub.core.utils.exceptions import CurrencyNotFoundError
 
 
@@ -9,7 +9,7 @@ class Currency(ABC):
             raise ValueError("Имя валюты не может быть пустым.")
         self.name = name.strip()
 
-        # Валидация кода: верхний регистр, 2-5 символов, без пробелов
+        # Валидация кода
         code_clean = code.strip().upper()
         if not (2 <= len(code_clean) <= 5) or " " in code_clean:
             raise ValueError("Код валюты должен быть от 2 до 5 символов, без пробелов.")
@@ -17,8 +17,7 @@ class Currency(ABC):
 
     @abstractmethod
     def get_display_info(self) -> str:
-        """Возвращает строковое представление для UI/логов."""
-        pass
+        """Возвращает строковое представление"""
 
 
 class FiatCurrency(Currency):
@@ -37,13 +36,13 @@ class CryptoCurrency(Currency):
         self.market_cap = market_cap
 
     def get_display_info(self) -> str:
-        # Форматируем капитализацию в экспоненциальный вид (например, 1.12e12)
+        # Форматируем капитализацию в экспоненциальный вид
         mcap_str = f"{self.market_cap:.2e}"
         return f"[CRYPTO] {self.code} — {self.name} (Algo: {self.algorithm}, MCAP: {mcap_str})"
 
 
-# --- Реестр валют (Фабрика) ---
-_CURRENCY_REGISTRY: Dict[str, Currency] = {
+# Реестр валют
+_CURRENCY_REGISTRY: dict[str, Currency] = {
     "USD": FiatCurrency("US Dollar", "USD", "United States"),
     "EUR": FiatCurrency("Euro", "EUR", "Eurozone"),
     "GBP": FiatCurrency("British Pound", "GBP", "United Kingdom"),
@@ -53,7 +52,7 @@ _CURRENCY_REGISTRY: Dict[str, Currency] = {
 
 
 def get_currency(code: str) -> Currency:
-    """Возвращает объект валюты по коду. Бросает CurrencyNotFoundError."""
+    """Возвращает объект валюты по коду"""
     if not code:
         raise CurrencyNotFoundError("Неизвестная валюта ''")
 

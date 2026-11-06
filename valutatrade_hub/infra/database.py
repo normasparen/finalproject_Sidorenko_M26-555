@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Any, Dict, List
+from typing import Any
 
 from valutatrade_hub.infra.settings import SettingsLoader
 
@@ -10,7 +10,7 @@ class DatabaseManager:
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
-            cls._instance = super(DatabaseManager, cls).__new__(cls)
+            cls._instance = super().__new__(cls)
             cls._instance._initialized = False
         return cls._instance
 
@@ -29,7 +29,7 @@ class DatabaseManager:
         if not os.path.exists(path):
             return default
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, encoding="utf-8") as f:
                 content = f.read().strip()
                 return json.loads(content) if content else default
         except (json.JSONDecodeError, OSError):
@@ -42,27 +42,26 @@ class DatabaseManager:
             json.dump(data, f, ensure_ascii=False, indent=2)
         os.replace(tmp, path)
 
-    # ---- users ----
-    def load_users(self) -> List[Dict]:
+    # user
+    def load_users(self) -> list[dict]:
         return self._load_json("users.json", [])
 
-    def save_users(self, users: List[Dict]) -> None:
+    def save_users(self, users: list[dict]) -> None:
         self._save_json("users.json", users)
 
-    # ---- portfolios ----
-    def load_portfolios(self) -> List[Dict]:
+    # portfel
+    def load_portfolios(self) -> list[dict]:
         return self._load_json("portfolios.json", [])
 
-    def save_portfolios(self, portfolios: List[Dict]) -> None:
+    def save_portfolios(self, portfolios: list[dict]) -> None:
         self._save_json("portfolios.json", portfolios)
 
-    # ---- rates ----
-    def load_rates(self) -> Dict:
+    # rate
+    def load_rates(self) -> dict:
         return self._load_json("rates.json", {})
 
-    def save_rates(self, rates: Dict) -> None:
+    def save_rates(self, rates: dict) -> None:
         self._save_json("rates.json", rates)
 
 
-# Удобный глобальный экземпляр
 db = DatabaseManager()

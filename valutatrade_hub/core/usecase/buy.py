@@ -1,10 +1,10 @@
 from valutatrade_hub.core.currencies import get_currency
 from valutatrade_hub.core.models.portfolio import Portfolio
-from valutatrade_hub.core.usecase.rate import get_rate
 from valutatrade_hub.core.session import Session
+from valutatrade_hub.core.usecase.rate import get_rate
+from valutatrade_hub.core.utils.decorators import log_action
 from valutatrade_hub.core.utils.exceptions import BuyError, CurrencyNotFoundError
 from valutatrade_hub.infra.database import db
-from valutatrade_hub.decorators import log_action
 
 
 def _load_portfolio(user_id: int) -> Portfolio:
@@ -53,7 +53,7 @@ def buy(currency: str, amount: float, **kwargs) -> dict:
     wallet.deposit(amount)
     cost_usd = amount * rate
 
-    # Опционально — списать USD (по логике ТЗ)
+    # списываем usd
     usd_wallet = portfolio.get_wallet("USD")
     if usd_wallet is not None:
         try:
@@ -66,6 +66,7 @@ def buy(currency: str, amount: float, **kwargs) -> dict:
     _save_portfolio(portfolio)
 
     return {
+        "username": user.username,
         "currency": currency_obj.code,
         "amount": amount,
         "rate": rate,

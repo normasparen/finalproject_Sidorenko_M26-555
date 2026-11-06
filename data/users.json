@@ -19,5 +19,12 @@
     "hashed_password": "e4ecfd2570082c6d77fee88541e8ab1806471656e48b83a8ef7b29eba97f3d66",
     "salt": "a6198cd3",
     "registration_date": "2026-11-05T09:31:36"
+  },
+  {
+    "user_id": 4,
+    "username": "nik",
+    "hashed_password": "3fdea17d627e8dff2add963903033c648f24ec0838e0c944949ac24ea9bd2149",
+    "salt": "109011d0",
+    "registration_date": "2026-11-06T11:02:02"
   }
 ]

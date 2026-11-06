@@ -1,5 +1,5 @@
 [project]
-name = "finalproject"
+name = "FinalProject"
 version = "0.1.0"
 description = "Final Python Project"
 readme = "README.md"
@@ -7,11 +7,24 @@ authors = [
     { name = "normasparen", email = "ni-kita04@mail.ru" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "python-dotenv>=1.2.4",
+    "requests>=2.34.2",
+]
 
 [project.scripts]
-finalproject = "finalproject:main"
+finalproject = "FinalProject:main"
 
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]
 build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "valutatrade_hub"
+module-root = ""
+namespace = true
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.4",
+]

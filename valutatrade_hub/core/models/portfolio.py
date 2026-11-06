@@ -1,14 +1,13 @@
-from typing import Dict, Optional
 
-from valutatrade_hub.core.models.wallet import Wallet
 from valutatrade_hub.core.currencies import get_currency
+from valutatrade_hub.core.models.wallet import Wallet
 from valutatrade_hub.core.usecase.rate import get_rate
 
 
 class Portfolio:
-    def __init__(self, user_id: int, wallets: Optional[Dict[str, Wallet]] = None):
+    def __init__(self, user_id: int, wallets: dict[str, Wallet] | None = None):
         self._user_id = user_id
-        self._wallets: Dict[str, Wallet] = {}
+        self._wallets: dict[str, Wallet] = {}
         if wallets:
             for code, w in wallets.items():
                 self._wallets[code.upper()] = w
@@ -18,7 +17,7 @@ class Portfolio:
         return self._user_id
 
     @property
-    def wallets(self) -> Dict[str, Wallet]:
+    def wallets(self) -> dict[str, Wallet]:
         return dict(self._wallets)
 
     def add_currency(self, currency_code: str, initial_balance: float = 0.0) -> Wallet:
@@ -30,7 +29,7 @@ class Portfolio:
         self._wallets[code] = wallet
         return wallet
 
-    def get_wallet(self, currency_code: str) -> Optional[Wallet]:
+    def get_wallet(self, currency_code: str) -> Wallet | None:
         if not currency_code:
             return None
         return self._wallets.get(currency_code.strip().upper())

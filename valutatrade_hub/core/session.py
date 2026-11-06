@@ -1,5 +1,4 @@
 import os
-from typing import Optional
 
 from valutatrade_hub.core.models.user import User
 
@@ -7,7 +6,7 @@ SESSION_FILE = ".session"
 
 
 class Session:
-    _current_user: Optional[User] = None
+    _current_user: User | None = None
 
     @classmethod
     def login(cls, user: User) -> None:
@@ -19,13 +18,13 @@ class Session:
             pass
 
     @classmethod
-    def get_current_user(cls) -> Optional[User]:
+    def get_current_user(cls) -> User | None:
         if cls._current_user is not None:
             return cls._current_user
 
         if os.path.exists(SESSION_FILE):
             try:
-                with open(SESSION_FILE, "r", encoding="utf-8") as f:
+                with open(SESSION_FILE, encoding="utf-8") as f:
                     uid = int(f.read().strip())
                 from valutatrade_hub.infra.database import db
                 for u in db.load_users():

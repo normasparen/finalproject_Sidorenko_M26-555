@@ -1,8 +1,6 @@
-from datetime import datetime
-
 from valutatrade_hub.core.models.user import User
-from valutatrade_hub.core.utils.exceptions import LoginError
 from valutatrade_hub.core.session import Session
+from valutatrade_hub.core.utils.exceptions import LoginError
 from valutatrade_hub.infra.database import db
 
 

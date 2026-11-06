@@ -1,9 +1,7 @@
 import json
 import os
-from datetime import timedelta, datetime
-from typing import Any, Dict, List, Tuple, Optional
-
-from valutatrade_hub.core.utils.utility import is_fresh, fetch_from_parser, now_iso
+from datetime import UTC, datetime, timedelta
+from typing import Any
 
 DATA_DIR = "data"
 
@@ -13,6 +11,20 @@ RATES_FILE = os.path.join(DATA_DIR, "rates.json")
 CACHE_TTL = timedelta(minutes=5)
 
 
+
+
+
+
+def is_fresh(updated_at: str, ttl: timedelta = CACHE_TTL) -> bool:
+    if not updated_at:
+        return False
+    try:
+        dt = datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=UTC)
+        return datetime.now(UTC) - dt <= ttl
+    except (ValueError, TypeError):
+        return False
 
 def _ensure_data_dir() -> None:
     os.makedirs(DATA_DIR, exist_ok=True)
@@ -24,7 +36,7 @@ def load_json(path: str, default: Any) -> Any:
     if not os.path.exists(path):
         return default
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             content = f.read().strip()
             return json.loads(content) if content else default
     except (json.JSONDecodeError, OSError):
@@ -44,7 +56,7 @@ def make_rate_cache(ttl: timedelta = CACHE_TTL):
     """
     Создает замыкание для кэша
     """
-    cache: Dict[tuple, Tuple[any, datetime]] = {}
+    cache: dict[tuple, tuple[any, datetime]] = {}
 
     def get_cached(func, *args):
         now = datetime.now()
@@ -66,13 +78,13 @@ def make_rate_cache(ttl: timedelta = CACHE_TTL):
 # глобальный кэш (один на все вызовы в сессии)
 get_cached = make_rate_cache()
 
-
-def load_rate_from_storage_or_parser(from_code: str, to_code: str) -> Optional[float]:
-    """Смотрит в rates.json. Если свежие данные, то берем их. Иначе - апи + сохранение."""
+def load_rate_from_storage_or_parser(from_code: str, to_code: str) -> float | None:
+    """
+    Только читает rates.json. Если данных нет или они устарели - возвращает None.
+    """
     key = f"{from_code}_{to_code}"
     reverse_key = f"{to_code}_{from_code}"
 
-    # читаем файл
     cache_data = load_rates()
 
     if key in cache_data and is_fresh(cache_data[key].get("updated_at", "")):
@@ -83,43 +95,30 @@ def load_rate_from_storage_or_parser(from_code: str, to_code: str) -> Optional[f
         if rev > 0:
             return 1.0 / rev
 
-    #  если файл устарел то идем в парсер
-    rate = fetch_from_parser(from_code, to_code)
-    if rate is None:
-        return None
-
-    #  сохраняем в файл
-    updated_at = now_iso()
-    cache_data[key] = {"rate": rate, "updated_at": updated_at}
-    if rate > 0:
-        cache_data[reverse_key] = {"rate": 1.0 / rate, "updated_at": updated_at}
-    cache_data["source"] = "ParserService"
-    cache_data["last_refresh"] = updated_at
-    save_rates(cache_data)
-
-    return rate
+    # Ничего не пишем возвращаем None
+    return None
 
 
 # Пользовател
-def load_users() -> List[Dict]:
+def load_users() -> list[dict]:
     return load_json(USERS_FILE, [])
 
 
-def save_users(users: List[Dict]) -> None:
+def save_users(users: list[dict]) -> None:
     save_json(USERS_FILE, users)
 
 
-def load_portfolios() -> List[Dict]:
+def load_portfolios() -> list[dict]:
     return load_json(PORTFOLIOS_FILE, [])
 
 
-def save_portfolios(portfolios: List[Dict]) -> None:
+def save_portfolios(portfolios: list[dict]) -> None:
     save_json(PORTFOLIOS_FILE, portfolios)
 
 
-def load_rates() -> Dict:
+def load_rates() -> dict:
     return load_json(RATES_FILE, {})
 
 
-def save_rates(rates: Dict) -> None:
+def save_rates(rates: dict) -> None:
     save_json(RATES_FILE, rates)

@@ -1,28 +1,53 @@
 {
   "BTC_USD": {
-    "rate": 59337.21,
-    "updated_at": "2026-11-05T09:39:15"
-  },
-  "USD_BTC": {
-    "rate": 1.685283146949444e-05,
-    "updated_at": "2026-11-05T09:39:15"
-  },
-  "source": "ParserService",
-  "last_refresh": "2026-11-05T09:39:15",
-  "BTC_ETH": {
-    "rate": 24.375,
-    "updated_at": "2026-11-02T12:35:15"
-  },
-  "ETH_BTC": {
-    "rate": 0.041025641025641026,
-    "updated_at": "2026-11-02T12:35:15"
+    "rate": 75564.0,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
   },
   "ETH_USD": {
-    "rate": 3720.0,
-    "updated_at": "2026-11-05T09:27:37"
+    "rate": 2223.66,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
   },
-  "USD_ETH": {
-    "rate": 0.00026881720430107527,
-    "updated_at": "2026-11-05T09:27:37"
-  }
+  "SOL_USD": {
+    "rate": 89.16,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
+  },
+  "USDT_USD": {
+    "rate": 0.998962,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
+  },
+  "USDC_USD": {
+    "rate": 0.999427,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
+  },
+  "EUR_USD": {
+    "rate": 1.1229646266142617,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
+  },
+  "GBP_USD": {
+    "rate": 1.3460761879122358,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
+  },
+  "RUB_USD": {
+    "rate": 0.012253940867382952,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
+  },
+  "JPY_USD": {
+    "rate": 0.0063357905641071134,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
+  },
+  "CNY_USD": {
+    "rate": 0.14964459408903852,
+    "updated_at": "2026-11-06T05:24:20Z",
+    "source": "ParserService"
+  },
+  "last_refresh": "2026-11-06T05:24:20Z"
 }

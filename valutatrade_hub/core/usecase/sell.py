@@ -1,12 +1,14 @@
 from valutatrade_hub.core.currencies import get_currency
 from valutatrade_hub.core.models.portfolio import Portfolio
-from valutatrade_hub.core.usecase.rate import get_rate
 from valutatrade_hub.core.session import Session
+from valutatrade_hub.core.usecase.rate import get_rate
+from valutatrade_hub.core.utils.decorators import log_action
 from valutatrade_hub.core.utils.exceptions import (
-    SellError, CurrencyNotFoundError, InsufficientFundsError,
+    CurrencyNotFoundError,
+    InsufficientFundsError,
+    SellError,
 )
 from valutatrade_hub.infra.database import db
-from valutatrade_hub.decorators import log_action
 
 
 def _load_portfolio(user_id: int) -> Portfolio:
@@ -68,6 +70,7 @@ def sell(currency: str, amount: float, **kwargs) -> dict:
 
     _save_portfolio(portfolio)
     return {
+        "username": user.username,
         "currency": currency_obj.code,
         "amount": amount,
         "rate": rate,

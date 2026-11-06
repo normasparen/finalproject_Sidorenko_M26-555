@@ -1,0 +1,92 @@
+[
+  {
+    "id": "BTC_USD_2026-11-06T05:24:20Z",
+    "from_currency": "BTC",
+    "to_currency": "USD",
+    "rate": 75564.0,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "ETH_USD_2026-11-06T05:24:20Z",
+    "from_currency": "ETH",
+    "to_currency": "USD",
+    "rate": 2223.66,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "SOL_USD_2026-11-06T05:24:20Z",
+    "from_currency": "SOL",
+    "to_currency": "USD",
+    "rate": 89.16,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "USDT_USD_2026-11-06T05:24:20Z",
+    "from_currency": "USDT",
+    "to_currency": "USD",
+    "rate": 0.998962,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "USDC_USD_2026-11-06T05:24:20Z",
+    "from_currency": "USDC",
+    "to_currency": "USD",
+    "rate": 0.999427,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "EUR_USD_2026-11-06T05:24:20Z",
+    "from_currency": "EUR",
+    "to_currency": "USD",
+    "rate": 1.1229646266142617,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "GBP_USD_2026-11-06T05:24:20Z",
+    "from_currency": "GBP",
+    "to_currency": "USD",
+    "rate": 1.3460761879122358,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "RUB_USD_2026-11-06T05:24:20Z",
+    "from_currency": "RUB",
+    "to_currency": "USD",
+    "rate": 0.012253940867382952,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "JPY_USD_2026-11-06T05:24:20Z",
+    "from_currency": "JPY",
+    "to_currency": "USD",
+    "rate": 0.0063357905641071134,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "CNY_USD_2026-11-06T05:24:20Z",
+    "from_currency": "CNY",
+    "to_currency": "USD",
+    "rate": 0.14964459408903852,
+    "timestamp": "2026-11-06T05:24:20Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  }
+]

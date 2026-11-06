@@ -12,7 +12,10 @@ def setup_logging(log_file: str = "logs/actions.log", level=logging.INFO):
     )
 
     # ротация
-    handler = RotatingFileHandler(log_file, maxBytes=1024 * 1024, backupCount=3)
+    handler = RotatingFileHandler(log_file,
+                                  maxBytes=1024 * 1024,
+                                  backupCount=3,
+                                  encoding="utf-8")
     handler.setFormatter(formatter)
 
     logger = logging.getLogger("valutatrade")

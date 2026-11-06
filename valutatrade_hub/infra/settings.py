@@ -1,13 +1,14 @@
 import json
 import os
-from typing import Any, Optional
+from typing import Any
+
 
 class SettingsLoader:
     _instance = None
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
-            cls._instance = super(SettingsLoader, cls).__new__(cls)
+            cls._instance = super().__new__(cls)
             cls._instance._initialized = False
         return cls._instance
 
@@ -22,11 +23,11 @@ class SettingsLoader:
     def reload(self) -> None:
 
         if os.path.exists(self._config_path):
-            with open(self._config_path, "r", encoding="utf-8") as f:
+            with open(self._config_path, encoding="utf-8") as f:
                 self._config = json.load(f)
         else:
             self._config = {
-                "RATES_TTL_SECONDS": 300,
+                "RATES_TTL_SECONDS": 120,
                 "BASE_CURRENCY": "USD",
                 "LOG_FILE": "logs/actions.log",
                 "DATA_DIR": "data"

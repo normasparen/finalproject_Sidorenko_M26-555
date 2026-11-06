@@ -1,8 +1,8 @@
 import functools
-from datetime import datetime
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
-from valutatrade_hub.logging_config import logger
+from valutatrade_hub.core.utils.logging_config import logger
 
 
 def _extract_arg(args, kwargs, *names):
@@ -10,8 +10,7 @@ def _extract_arg(args, kwargs, *names):
     for name in names:
         if name in kwargs:
             return kwargs[name]
-    # Если не нашли в kwargs — пробуем вытащить из args по порядку
-    # (простая эвристика: username/currency/amount идут первыми)
+
     for val in args:
         if isinstance(val, str) and val.isupper() and 2 <= len(val) <= 5:
             return val  # похоже на код валюты
@@ -20,17 +19,13 @@ def _extract_arg(args, kwargs, *names):
 
 def log_action(action: str, verbose: bool = False) -> Callable:
     """
-    Логирует доменную операцию (BUY/SELL/REGISTER/LOGIN) в формате:
-    INFO 2025-10-09T12:05:22 BUY user='alice' currency='BTC' amount=0.0500
-         rate=59300.00 base='USD' result=OK
-
-    Исключения не глотает — пробрасывает дальше, но фиксирует их в лог.
+    Логирует доменную операцию (BUY/SELL/REGISTER/LOGIN)
     """
 
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> Any:
-            # --- Пытаемся вытащить контекст ---
+            # Пытаемся вытащить контекст
             username = (
                 kwargs.get("username")
                 or kwargs.get("user")
@@ -51,7 +46,7 @@ def log_action(action: str, verbose: bool = False) -> Callable:
             try:
                 result = func(*args, **kwargs)
 
-                # Обогащаем контекст из результата, если он вернул dict
+                # Обогащаем контекст из результата, если он вернул словарь
                 if isinstance(result, dict):
                     username = username or result.get("username")
                     currency = result.get("currency", currency)
@@ -59,7 +54,6 @@ def log_action(action: str, verbose: bool = False) -> Callable:
                     rate = result.get("rate", rate)
                     base = result.get("base", base)
 
-                # Форматируем поля
                 user_str = f"'{username}'" if username else "'unknown'"
                 curr_str = f"'{currency}'" if currency else "'-'"
                 amount_str = f"{amount:.4f}" if isinstance(amount, (int, float)) else "-"
@@ -71,7 +65,6 @@ def log_action(action: str, verbose: bool = False) -> Callable:
                     f"amount={amount_str} rate={rate_str} base={base_str} result=OK"
                 )
                 if verbose and isinstance(result, dict):
-                    # Показываем изменение баланса «было → стало»
                     old = result.get("old_balance")
                     new = result.get("new_balance")
                     if old is not None and new is not None:
@@ -85,7 +78,6 @@ def log_action(action: str, verbose: bool = False) -> Callable:
                 return result
 
             except Exception as e:
-                # Логируем ошибку и пробрасываем дальше
                 user_str = f"'{username}'" if username else "'unknown'"
                 curr_str = f"'{currency}'" if currency else "'-'"
                 amount_str = f"{amount:.4f}" if isinstance(amount, (int, float)) else "-"

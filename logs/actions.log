@@ -1,7 +1,13 @@
-INFO 2026-11-05T09:27:22 BUY user='unknown' currency='unknown' amount=0.0000 result=OK (details: {'currency': 'USD', 'amount': 5000.0, 'rate': 1.0, 'old_balance': 0.0, 'new_balance': 0.0, 'cost_usd': 5000.0})
-ERROR 2026-11-05T09:27:37 BUY user='unknown' currency='unknown' amount=0.0000 result=ERROR error_type='BuyError' error_msg='Недостаточно USD: требуется 3720.00 USD'
-INFO 2026-11-05T09:33:07 BUY user='unknown' currency='unknown' amount=0.0000 result=OK (details: {'currency': 'BTC', 'amount': 0.1, 'rate': 59337.21, 'old_balance': 0.0, 'new_balance': 0.1, 'cost_usd': 5933.7210000000005})
-ERROR 2026-11-05T09:33:47 BUY user='unknown' currency='unknown' amount=0.0000 result=ERROR error_type='BuyError' error_msg='Недостаточно USD: требуется 59337.21 USD'
-ERROR 2026-11-05T09:34:21 SELL user='unknown' currency='unknown' amount=0.0000 result=ERROR error_type='SellError' error_msg='Недостаточно средств: доступно 0.1 BTC, требуется 0.2 BTC'
-INFO 2026-11-05T09:34:25 SELL user='unknown' currency='unknown' amount=0.0000 result=OK (details: {'currency': 'BTC', 'amount': 0.09, 'rate': 59337.21, 'old_balance': 0.1, 'new_balance': 0.010000000000000009, 'proceeds_usd': 5340.3489})
-ERROR 2026-11-05T09:39:15 SELL user='unknown' currency='BTC' amount=0.0900 result=ERROR error_type='SellError' error_msg='Недостаточно средств: доступно 0.010000000000000009 BTC, требуется 0.09 BTC'
+INFO 2026-11-06T12:14:31 BUY user='unknown' currency='BTC' amount=0.1000 rate=59337.21 base='USD' result=OK balance: 0.0000в†’0.1000 cost_usd=5933.72
+ERROR 2026-11-06T12:16:29 BUY user='unknown' currency='BTC' amount=0.1000 result=ERROR error_type='BuyError' error_msg='РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ USD: С‚СЂРµР±СѓРµС‚СЃСЏ 5933.72 USD'
+INFO 2026-11-06T12:16:36 SELL user='nik' currency='BTC' amount=0.1000 rate=59337.21 base='USD' result=OK balance: 0.1000в†’0.0000 proceeds_usd=5933.72
+INFO 2026-11-06T12:23:38 Starting rates update...
+INFO 2026-11-06T12:23:38 Fetching from CoinGecko...
+INFO 2026-11-06T12:23:59 CoinGecko: OK (5 rates)
+INFO 2026-11-06T12:23:59 Fetching from ExchangeRate-API...
+INFO 2026-11-06T12:24:20 ExchangeRate-API: OK (5 rates)
+INFO 2026-11-06T12:24:20 Writing 10 rates to data/rates.json
+INFO 2026-11-06T12:24:20 History updated for CoinGecko (+5 records)
+INFO 2026-11-06T12:24:20 History updated for ExchangeRate-API (+5 records)
+INFO 2026-11-06T12:24:49 BUY user='nik' currency='BTC' amount=0.1000 rate=75564.00 base='USD' result=OK balance: 0.0000в†’0.1000 cost_usd=7556.40
+ERROR 2026-11-06T12:26:10 BUY user='unknown' currency='BTC' amount=0.1000 result=ERROR error_type='BuyError' error_msg='РЎРЅР°С‡Р°Р»Р° РІС‹РїРѕР»РЅРёС‚Рµ login'

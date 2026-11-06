@@ -1,8 +1,8 @@
-from valutatrade_hub.core.models.portfolio import Portfolio
-from valutatrade_hub.core.usecase.rate import get_rate
-from valutatrade_hub.core.session import Session
 from valutatrade_hub.core.currencies import get_currency
-from valutatrade_hub.core.utils.exceptions import PortfolioError, CurrencyNotFoundError
+from valutatrade_hub.core.models.portfolio import Portfolio
+from valutatrade_hub.core.session import Session
+from valutatrade_hub.core.usecase.rate import get_rate
+from valutatrade_hub.core.utils.exceptions import CurrencyNotFoundError, PortfolioError
 from valutatrade_hub.infra.database import db
 
 
