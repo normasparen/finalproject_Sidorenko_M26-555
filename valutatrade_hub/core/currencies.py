@@ -46,10 +46,15 @@ _CURRENCY_REGISTRY: dict[str, Currency] = {
     "USD": FiatCurrency("US Dollar", "USD", "United States"),
     "EUR": FiatCurrency("Euro", "EUR", "Eurozone"),
     "GBP": FiatCurrency("British Pound", "GBP", "United Kingdom"),
+    "RUB": FiatCurrency("Russian Ruble", "RUB", "Russia"),
+    "JPY": FiatCurrency("Japanese Yen", "JPY", "Japan"),
+    "CNY": FiatCurrency("Chinese Yuan", "CNY", "China"),
     "BTC": CryptoCurrency("Bitcoin", "BTC", "SHA-256", 1.12e12),
     "ETH": CryptoCurrency("Ethereum", "ETH", "Ethash", 3.8e11),
+    "SOL": CryptoCurrency("Solana", "SOL", "Proof of History", 4.2e10),
+    "USDT": CryptoCurrency("Tether", "USDT", "Omni Layer", 1.0e11),
+    "USDC": CryptoCurrency("USD Coin", "USDC", "Ethereum", 3.2e10),
 }
-
 
 def get_currency(code: str) -> Currency:
     """Возвращает объект валюты по коду"""

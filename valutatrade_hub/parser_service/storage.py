@@ -33,7 +33,7 @@ class ParserStorage:
             json.dump(data, f, ensure_ascii=False, indent=2)
         os.replace(tmp, path)
 
-    def append_history(self, rates: dict[str, float], source: str, meta: dict = None) -> int:
+    def append_history(self, rates: dict[str, float], source: str, meta: dict | None = None) -> int:
         """Добавляет записи в exchange_rates.json."""
         history: list[dict] = self._safe_load(self.history_path, [])
         if not isinstance(history, list):

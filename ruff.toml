@@ -10,9 +10,6 @@ select = [
     "B",   # bugbear
 ]
 ignore = [
-    "E501",    # длинные строки
-    "B008",    # вызов функции в default
     "N999",    # имя проекта FinalProject
     "BLE001",  # except Exception
-    "FURB162", # .replace("Z", "+00:00")
 ]

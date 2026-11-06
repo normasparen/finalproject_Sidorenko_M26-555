@@ -35,7 +35,7 @@ def buy(currency: str, amount: float, **kwargs) -> dict:
     try:
         currency_obj = get_currency(currency)
     except CurrencyNotFoundError as e:
-        raise BuyError(str(e))
+        raise BuyError(str(e)) from e
 
     if amount is None or amount <= 0:
         raise BuyError("'amount' должен быть положительным числом")
@@ -58,10 +58,10 @@ def buy(currency: str, amount: float, **kwargs) -> dict:
     if usd_wallet is not None:
         try:
             usd_wallet.withdraw(cost_usd)
-        except Exception:
+        except Exception as e:
             # откатываем
             wallet.withdraw(amount)
-            raise BuyError(f"Недостаточно USD: требуется {cost_usd:.2f} USD")
+            raise BuyError(f"Недостаточно USD: требуется {cost_usd:.2f} USD") from e
 
     _save_portfolio(portfolio)
 

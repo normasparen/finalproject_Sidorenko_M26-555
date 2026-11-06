@@ -40,7 +40,8 @@ class InsufficientFundsError(Exception):
         self.available = available
         self.required = required
         self.code = code
-        super().__init__(f"Недостаточно средств: доступно {available} {code}, требуется {required} {code}")
+        super().__init__(f"Недостаточно средств:"
+                         f" доступно {available} {code}, требуется {required} {code}")
 
 
 class ApiRequestError(Exception):

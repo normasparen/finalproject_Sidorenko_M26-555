@@ -32,7 +32,7 @@ def _is_fresh(updated_at: str) -> bool:
     if not updated_at:
         return False
     try:
-        dt = datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
+        dt = datetime.fromisoformat(updated_at)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=UTC)
         now = datetime.now(UTC)
@@ -110,7 +110,7 @@ def get_rate_info(from_code: str, to_code: str) -> dict:
         src = get_currency(from_code)
         dst = get_currency(to_code)
     except CurrencyNotFoundError as e:
-        raise RateError(str(e))
+        raise RateError(str(e)) from e
 
     if src.code == dst.code:
         return {"from": src.code, "to": dst.code, "rate": 1.0,
@@ -119,7 +119,7 @@ def get_rate_info(from_code: str, to_code: str) -> dict:
     try:
         rate, updated_at = get_rate(src.code, dst.code)
     except ApiRequestError as e:
-        raise RateError(str(e))
+        raise RateError(str(e)) from e
 
     if rate is None:
         raise RateError(

@@ -34,11 +34,13 @@ def log_action(action: str, verbose: bool = False) -> Callable:
             currency = (
                 kwargs.get("currency")
                 or kwargs.get("currency_code")
-                or next((a for a in args if isinstance(a, str) and a.isupper() and 2 <= len(a) <= 5), None)
+                or next((a for a in args if isinstance(a, str)
+                         and a.isupper() and 2 <= len(a) <= 5), None)
             )
             amount = kwargs.get("amount")
             if amount is None:
-                amount = next((a for a in args if isinstance(a, (int, float)) and not isinstance(a, bool)), None)
+                amount = next((a for a in args if isinstance(a, (int, float))
+                               and not isinstance(a, bool)), None)
 
             rate = kwargs.get("rate", "-")
             base = kwargs.get("base", "USD")

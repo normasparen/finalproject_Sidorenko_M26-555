@@ -88,5 +88,275 @@
     "timestamp": "2026-11-06T05:24:20Z",
     "source": "ExchangeRate-API",
     "meta": {}
+  },
+  {
+    "id": "BTC_USD_2026-11-06T05:40:51Z",
+    "from_currency": "BTC",
+    "to_currency": "USD",
+    "rate": 75579.0,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "ETH_USD_2026-11-06T05:40:51Z",
+    "from_currency": "ETH",
+    "to_currency": "USD",
+    "rate": 2224.12,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "SOL_USD_2026-11-06T05:40:51Z",
+    "from_currency": "SOL",
+    "to_currency": "USD",
+    "rate": 89.34,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "USDT_USD_2026-11-06T05:40:51Z",
+    "from_currency": "USDT",
+    "to_currency": "USD",
+    "rate": 0.999008,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "USDC_USD_2026-11-06T05:40:51Z",
+    "from_currency": "USDC",
+    "to_currency": "USD",
+    "rate": 0.999463,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "EUR_USD_2026-11-06T05:40:51Z",
+    "from_currency": "EUR",
+    "to_currency": "USD",
+    "rate": 1.1229646266142617,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "GBP_USD_2026-11-06T05:40:51Z",
+    "from_currency": "GBP",
+    "to_currency": "USD",
+    "rate": 1.3460761879122358,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "RUB_USD_2026-11-06T05:40:51Z",
+    "from_currency": "RUB",
+    "to_currency": "USD",
+    "rate": 0.012253940867382952,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "JPY_USD_2026-11-06T05:40:51Z",
+    "from_currency": "JPY",
+    "to_currency": "USD",
+    "rate": 0.0063357905641071134,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "CNY_USD_2026-11-06T05:40:51Z",
+    "from_currency": "CNY",
+    "to_currency": "USD",
+    "rate": 0.14964459408903852,
+    "timestamp": "2026-11-06T05:40:51Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "BTC_USD_2026-11-06T05:46:46Z",
+    "from_currency": "BTC",
+    "to_currency": "USD",
+    "rate": 75547.0,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "ETH_USD_2026-11-06T05:46:46Z",
+    "from_currency": "ETH",
+    "to_currency": "USD",
+    "rate": 2220.91,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "SOL_USD_2026-11-06T05:46:46Z",
+    "from_currency": "SOL",
+    "to_currency": "USD",
+    "rate": 89.24,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "USDT_USD_2026-11-06T05:46:46Z",
+    "from_currency": "USDT",
+    "to_currency": "USD",
+    "rate": 0.998998,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "USDC_USD_2026-11-06T05:46:46Z",
+    "from_currency": "USDC",
+    "to_currency": "USD",
+    "rate": 0.999444,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "EUR_USD_2026-11-06T05:46:46Z",
+    "from_currency": "EUR",
+    "to_currency": "USD",
+    "rate": 1.1229646266142617,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "GBP_USD_2026-11-06T05:46:46Z",
+    "from_currency": "GBP",
+    "to_currency": "USD",
+    "rate": 1.3460761879122358,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "RUB_USD_2026-11-06T05:46:46Z",
+    "from_currency": "RUB",
+    "to_currency": "USD",
+    "rate": 0.012253940867382952,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "JPY_USD_2026-11-06T05:46:46Z",
+    "from_currency": "JPY",
+    "to_currency": "USD",
+    "rate": 0.0063357905641071134,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "CNY_USD_2026-11-06T05:46:46Z",
+    "from_currency": "CNY",
+    "to_currency": "USD",
+    "rate": 0.14964459408903852,
+    "timestamp": "2026-11-06T05:46:46Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "BTC_USD_2026-11-06T05:53:58Z",
+    "from_currency": "BTC",
+    "to_currency": "USD",
+    "rate": 75662.0,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "ETH_USD_2026-11-06T05:53:58Z",
+    "from_currency": "ETH",
+    "to_currency": "USD",
+    "rate": 2224.18,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "SOL_USD_2026-11-06T05:53:58Z",
+    "from_currency": "SOL",
+    "to_currency": "USD",
+    "rate": 89.33,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "USDT_USD_2026-11-06T05:53:58Z",
+    "from_currency": "USDT",
+    "to_currency": "USD",
+    "rate": 0.999016,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "USDC_USD_2026-11-06T05:53:58Z",
+    "from_currency": "USDC",
+    "to_currency": "USD",
+    "rate": 0.999453,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "CoinGecko",
+    "meta": {}
+  },
+  {
+    "id": "EUR_USD_2026-11-06T05:53:58Z",
+    "from_currency": "EUR",
+    "to_currency": "USD",
+    "rate": 1.1229646266142617,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "GBP_USD_2026-11-06T05:53:58Z",
+    "from_currency": "GBP",
+    "to_currency": "USD",
+    "rate": 1.3460761879122358,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "RUB_USD_2026-11-06T05:53:58Z",
+    "from_currency": "RUB",
+    "to_currency": "USD",
+    "rate": 0.012253940867382952,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "JPY_USD_2026-11-06T05:53:58Z",
+    "from_currency": "JPY",
+    "to_currency": "USD",
+    "rate": 0.0063357905641071134,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
+  },
+  {
+    "id": "CNY_USD_2026-11-06T05:53:58Z",
+    "from_currency": "CNY",
+    "to_currency": "USD",
+    "rate": 0.14964459408903852,
+    "timestamp": "2026-11-06T05:53:58Z",
+    "source": "ExchangeRate-API",
+    "meta": {}
   }
 ]

@@ -34,7 +34,7 @@ class CoinGeckoClient(BaseApiClient):
         url = self._build_url()
         last_error: Exception | None = None
 
-        for attempt in range(1, self.config.MAX_RETRIES + 1):
+        for _attempt in range(1, self.config.MAX_RETRIES + 1):
             try:
                 response = requests.get(url, timeout=self.config.REQUEST_TIMEOUT)
                 response.raise_for_status()
@@ -81,7 +81,7 @@ class ExchangeRateApiClient(BaseApiClient):
         url = self._build_url()
         last_error: Exception | None = None
 
-        for attempt in range(1, self.config.MAX_RETRIES + 1):
+        for _attempt in range(1, self.config.MAX_RETRIES + 1):
             try:
                 response = requests.get(url, timeout=self.config.REQUEST_TIMEOUT)
                 if response.status_code == 429:
@@ -97,7 +97,8 @@ class ExchangeRateApiClient(BaseApiClient):
 
     def _parse(self, data: dict) -> dict[str, float]:
         if data.get("result") != "success":
-            raise ApiRequestError(f"ExchangeRate-API: ответ с ошибкой: {data.get('error-type', 'unknown')}")
+            raise ApiRequestError(f"ExchangeRate-API: "
+                                  f"ответ с ошибкой: {data.get('error-type', 'unknown')}")
 
         rates = data.get("conversion_rates", {})
         base = data.get("base_code", self.config.BASE_CURRENCY)

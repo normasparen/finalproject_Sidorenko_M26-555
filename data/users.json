@@ -26,5 +26,12 @@
     "hashed_password": "3fdea17d627e8dff2add963903033c648f24ec0838e0c944949ac24ea9bd2149",
     "salt": "109011d0",
     "registration_date": "2026-11-06T11:02:02"
+  },
+  {
+    "user_id": 5,
+    "username": "Nikitos",
+    "hashed_password": "229afda9a0c9a84560eae4b6f48b691285d3786c40d3e56db6bd31c3d7228bfa",
+    "salt": "98465f52",
+    "registration_date": "2026-11-06T12:51:35"
   }
 ]

@@ -13,8 +13,8 @@ def show_portfolio(base: str = "USD") -> dict:
 
     try:
         base_currency = get_currency(base)
-    except CurrencyNotFoundError:
-        raise PortfolioError(f"Неизвестная базовая валюта '{base}'")
+    except CurrencyNotFoundError as e:
+        raise PortfolioError(f"Неизвестная базовая валюта '{base}'") from e
 
     portfolio = None
     for p in db.load_portfolios():

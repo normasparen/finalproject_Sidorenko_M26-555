@@ -19,7 +19,7 @@ def is_fresh(updated_at: str, ttl: timedelta = CACHE_TTL) -> bool:
     if not updated_at:
         return False
     try:
-        dt = datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
+        dt = datetime.fromisoformat(updated_at)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=UTC)
         return datetime.now(UTC) - dt <= ttl

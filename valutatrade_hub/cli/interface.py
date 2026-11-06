@@ -368,13 +368,13 @@ def bootstrap_rates_if_needed() -> None:
         if isinstance(v, dict) and is_fresh(v.get("updated_at", ""))
     )
     if fresh_count == 0:
-        print("[startup] Курсы устарели или отсутствуют. Обновляем...")
+        print("Курсы устарели или отсутствуют. Обновляем..")
         result = RatesUpdater(cfg).run_update()
         if result["status"] in ("ok", "partial"):
-            print(f"[startup] Обновлено курсов: {result['rates_count']}")
+            print(f"Обновлено курсов: {result['rates_count']}")
         else:
-            print(f"[startup] Не удалось обновить курсы: {result.get('error')}")
-            print("[startup] Запустите 'update-rates' вручную.")
+            print(f"Не удалось обновить курсы: {result.get('error')}")
+            print("Запустите 'update-rates' вручную.")
 
 # run
 def run(argv: list[str] | None = None) -> int:

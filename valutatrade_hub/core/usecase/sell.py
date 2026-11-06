@@ -39,7 +39,7 @@ def sell(currency: str, amount: float, **kwargs) -> dict:
     try:
         currency_obj = get_currency(currency)
     except CurrencyNotFoundError as e:
-        raise SellError(str(e))
+        raise SellError(str(e)) from e
 
     if amount is None or amount <= 0:
         raise SellError("'amount' должен быть положительным числом")
@@ -60,7 +60,7 @@ def sell(currency: str, amount: float, **kwargs) -> dict:
     try:
         wallet.withdraw(amount)
     except InsufficientFundsError as e:
-        raise SellError(str(e))
+        raise SellError(str(e)) from e
 
     proceeds_usd = amount * rate
     usd_wallet = portfolio.get_wallet("USD")
