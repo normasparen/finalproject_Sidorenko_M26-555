@@ -16,7 +16,7 @@ uv sync
 
 2. Запуск
 ```bash
- python -m valutatrade_hub.main
+ uv run python -m valutatrade_hub.main
  ```
 
 ## 🔑 Ключи API
